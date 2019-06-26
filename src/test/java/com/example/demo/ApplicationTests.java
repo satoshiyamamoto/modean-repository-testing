@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
@@ -14,7 +17,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
-@SpringBootTest
+@DataJpaTest // or @SpringBootTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 @ContextConfiguration(initializers = {MySQLContainerInitializer.class})
 class ApplicationTests {
 
